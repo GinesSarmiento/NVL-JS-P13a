@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NVL-JS-P12b</title>
+</head>
+<body>
+	<script>
+
+		//Declaramos dos variables globales
+		//n será el número de primos que buscará la función
+		var n = 1000;
+		//primos es el array que almacenará los números primos que se encuentren
+		var primos = new Array();
+
+		//Ejecutamos la función que buscará los números primos
+		calcular_primos();
+
+		//Declaramos la función
+		function calcular_primos(){
+			//Declaramos una variable local que contará los números primos encontrados
+			var m = 1;
+			primos.push(2);
+			//Creamos un bucle que empiece en 3, ya que hemos introducido 2 como primer número primo
+			//Se recorrerá hasta encontrar los números indicados en la variable n
+			for (i=3;m<n;i++){
+				//Declaramos una variable local auxiliar para determinar si cada número comprobado es primo o no
+				var esprimo = true;
+
+				//Recorremos el array para dividir el número a comprobar entre los valores almacenados en el array
+				for (e=0;e<primos.length;e++){
+					//Realizamos la division, si el resto es 0, significa que no es primo, lo almacenamos en la variable auxiliar y salimos del bucle
+					if (i%primos[e] ==0){
+						esprimo = false;
+						break;
+					}
+				}
+				//Si se ha recorrido el bucle, y no se ha encontrado ningúna división que de resto 0, significa que el número es primo
+				if (esprimo === true){
+					//Almacenamos el número en el array
+					primos.push(i);
+					//Aumentamos el contador de números primos
+					m++;
+				}
+			}
+		}
+
+	//Mostramos los resultados en el docuemento
+	document.write('<h1>Los primeros ' + n + ' números primos son:</h1>');
+	//Abrimos las etiquetas de la tabla y la primera fila
+	document.write('<table><tr>');
+	
+	//Recorremos el array con un bucle para poder mostrar los números en una tabla
+	for (i=0;i<primos.length;i++){
+		//Escribimos el código para almacenar el número primo en una celda
+		document.write('<td>'+ primos[i] + '</td>');
+		//Cada 10 números cambiamos la fila, y comprueba si es el último número, para que en caso de que n sea multiplo de 10 no añada una fila vacía al final
+		if ((i+1)%10==0 && i!==(n-1)){	
+			document.write('</tr>');
+			document.write('<tr>');
+		}
+	}
+	//Cerramos las etiquetas abiertas, es decir, fila y tabla
+	document.write('</tr></table>');
+</script>
+</body>
+</html>
